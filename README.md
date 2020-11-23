@@ -40,7 +40,14 @@ const API_KEY = 'ENTER YOUR API';
 todo
 
 ## Solution 
-todo
+### Algorithms
+- Gift wrapping: O(nh) //fP(n) <= cnh
+- Graham Scan: O(n log n) //fP(n) <= cn log n
+- Chan's algorithm: O(n log h) //fP(n) <= cn log h
+- Kirkpatrick-Seidel algorithm O(n log h)
+
+n - the number of input points  
+h - the number of points on the convex hull
 
 ## Project layout
 todo
