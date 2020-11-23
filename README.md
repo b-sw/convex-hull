@@ -41,13 +41,11 @@ todo
 
 ## Solution 
 ### Algorithms
-- Gift wrapping: O(nh) //fP(n) <= cnh
-- Graham Scan: O(n log n) //fP(n) <= cn log n
-- Chan's algorithm: O(n log h) //fP(n) <= cn log h
-- Kirkpatrick-Seidel algorithm O(n log h)
-
-n - the number of input points  
-h - the number of points on the convex hull
+- Naive Algorithm O(n^4)
+- Gift Wrapping O(nF)
+- Incremental O(n^2)
+- Divide-and-Conquer (n log n)
+F is the number of faces on CH
 
 ## Project layout
 todo
