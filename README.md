@@ -40,7 +40,12 @@ const API_KEY = 'ENTER YOUR API';
 todo
 
 ## Solution 
-todo
+### Algorithms
+- Naive Algorithm O(n^4)
+- Gift Wrapping O(nF)
+- Incremental O(n^2)
+- Divide-and-Conquer (n log n)
+F is the number of faces on CH
 
 ## Project layout
 todo
