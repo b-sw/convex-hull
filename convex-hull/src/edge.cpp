@@ -7,7 +7,7 @@
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
 */
-#include "edge.hpp"
+#include "../lib/edge.hpp"
 
 Edge::Edge(Point points[EDGE_POINTS]){
     for(int i = 0; i < EDGE_POINTS; ++i){

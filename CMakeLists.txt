@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.17)
 project(convex_hull)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -7,12 +7,14 @@ include_directories(hdr)
 include_directories(src)
 
 add_executable(convex_hull
-        hdr/face.hpp
-        hdr/point.hpp
-        hdr/edge.hpp
-        hdr/test.hpp
-        src/point.cpp
-        src/face.cpp
-        src/edge.cpp
-        src/test.cpp
-        src/main.cpp hdr/generator.hpp src/generator.cpp)
+        convex-hull/lib/face.hpp
+        convex-hull/lib/point.hpp
+        convex-hull/lib/edge.hpp
+        convex-hull/lib/test.hpp
+        convex-hull/lib/generator.hpp
+        convex-hull/src/point.cpp
+        convex-hull/src/face.cpp
+        convex-hull/src/edge.cpp
+        convex-hull/tests/test.cpp
+        convex-hull/src/generator.cpp
+        convex-hull/src/main.cpp)

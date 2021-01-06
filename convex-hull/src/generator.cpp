@@ -7,7 +7,7 @@
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
 */
-#include "generator.hpp"
+#include "../lib/generator.hpp"
 
 std::vector<Point> Generator::generatePoints(int seed, int n) {
     std::mt19937 mt(seed);

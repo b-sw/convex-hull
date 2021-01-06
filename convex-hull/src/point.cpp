@@ -7,7 +7,7 @@
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
 */
-#include "point.hpp"
+#include "../lib/point.hpp"
 
 Point::Point(double x, double y, double z){
     this->coords[X] = x;
