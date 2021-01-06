@@ -9,7 +9,7 @@
 */
 #include "point.hpp"
 
-Point::Point(int x, int y, int z){
+Point::Point(double x, double y, double z){
     this->coords[X] = x;
     this->coords[Y] = y;
     this->coords[Z] = z;

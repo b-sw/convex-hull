@@ -18,10 +18,14 @@
 
 class Point{
 public:
-    explicit Point(int x, int y, int z);
+    explicit Point(double x, double y, double z);
     Point() = default;
     ~Point() = default;
 
+    inline double getX() { return coords[X]; }
+    inline double getY() { return coords[Y]; }
+    inline double getZ() { return coords[Z]; }
+
 private:
-    std::array<int, POINT_COORDS> coords = {};
+    std::array<double, POINT_COORDS> coords = {};
 };

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.15)
 project(convex_hull)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -15,4 +15,4 @@ add_executable(convex_hull
         src/face.cpp
         src/edge.cpp
         src/test.cpp
-        src/main.cpp)
+        src/main.cpp hdr/generator.hpp src/generator.cpp)

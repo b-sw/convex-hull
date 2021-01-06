@@ -11,7 +11,9 @@
 
 #include "edge.hpp"
 #include "face.hpp"
+#include "generator.hpp"
 #include <cassert>
+#include <vector>
 
 #define TEST_NUM 3
 
@@ -23,3 +25,5 @@ bool testPoint();
 bool testEdge();
 
 bool testFace();
+
+bool testGenerator();
