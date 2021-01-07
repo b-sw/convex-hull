@@ -22,7 +22,7 @@ public:
     Point() = default;
     ~Point() = default;
 
-    auto& operator[](int i) {return this->coords[i];}
+    auto& operator[](int i) const {return this->coords[i];}
 
 private:
     std::array<double, POINT_COORDS> coords = {};

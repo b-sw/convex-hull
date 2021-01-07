@@ -17,6 +17,6 @@
 #define MU 5
 #define VAR 3
 
-namespace Generator{
+namespace generator{
     std::vector<Point> generatePoints(int seed, int n);
 };

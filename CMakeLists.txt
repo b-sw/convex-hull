@@ -16,4 +16,4 @@ add_executable(convex_hull
         convex-hull/src/edge.cpp
         convex-hull/tests/test.cpp
         convex-hull/src/generator.cpp
-        convex-hull/src/main.cpp convex-hull/lib/chull.hpp convex-hull/src/chull.cpp)
+        convex-hull/src/main.cpp convex-hull/lib/chull.hpp convex-hull/src/chull.cpp convex-hull/src/preprocessing.cpp convex-hull/src/preprocessing.hpp)

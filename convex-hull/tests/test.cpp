@@ -50,7 +50,7 @@ bool testFace(){
 bool testGenerator() {
     int seed = 1234;
     int n = 5;
-    std::vector<Point> pts = Generator::generatePoints(seed, n);
+    std::vector<Point> pts = generator::generatePoints(seed, n);
     assertm(pts.size() == n, "Failed to generate points.");
     return true;
 }
