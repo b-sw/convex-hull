@@ -16,10 +16,7 @@
 #include <cassert>
 #include <vector>
 
-#define TEST_NUM 3
-
 bool unitTests();
-/* Run all tests. */
 
 bool testPoint();
 
