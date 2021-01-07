@@ -22,6 +22,8 @@ public:
     Point() = default;
     ~Point() = default;
 
+    auto& operator[](int i) {return this->coords[i];}
+
     inline double getX() { return coords[X]; }
     inline double getY() { return coords[Y]; }
     inline double getZ() { return coords[Z]; }

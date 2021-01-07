@@ -3,8 +3,8 @@ project(convex_hull)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(hdr)
-include_directories(src)
+include_directories(convex-hull/lib)
+include_directories(convex-hull/src)
 
 add_executable(convex_hull
         convex-hull/lib/face.hpp
@@ -17,4 +17,4 @@ add_executable(convex_hull
         convex-hull/src/edge.cpp
         convex-hull/tests/test.cpp
         convex-hull/src/generator.cpp
-        convex-hull/src/main.cpp)
+        convex-hull/src/main.cpp convex-hull/lib/chull.hpp convex-hull/src/chull.cpp)

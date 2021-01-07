@@ -7,7 +7,7 @@
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
 */
-#include "../lib/test.hpp"
+#include "test.hpp"
 
 #define assertm(exp, msg) assert(((void)msg, exp))
 
@@ -33,17 +33,14 @@ bool testPoint(){
 }
 
 bool testEdge(){
-    Point pts[2] = {Point(1, 2, 3),
-                    Point(4, 5, 6)};
+    int pts[2] = {5,8};
     Edge* e = new Edge(pts);
     assertm(e != nullptr, "Failed to construct an Edge.");
     return true;
 }
 
 bool testFace(){
-    Point pts[3] = {Point(1, 2, 3),
-                    Point(4, 5, 6),
-                    Point(7, 8, 9)};
+    int pts[3] = {1, 2, 3};
     Face* f = new Face(pts);
     assertm(f != nullptr, "Failed to construct a Face.");
     return true;

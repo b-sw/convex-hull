@@ -15,10 +15,12 @@
 
 class Edge{
 public:
-    explicit Edge(Point pts[EDGE_POINTS]);
+    explicit Edge(const int points[EDGE_POINTS]);
     Edge() = default;
     ~Edge() = default;
 
+    auto& operator[](int i) {return this->points[i];}
+
 private:
-    std::array<Point, EDGE_POINTS> points = {};
+    std::array<int, EDGE_POINTS> points = {};
 };

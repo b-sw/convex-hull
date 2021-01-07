@@ -12,6 +12,7 @@
 #include "edge.hpp"
 #include "face.hpp"
 #include "generator.hpp"
+#include "chull.hpp"
 #include <cassert>
 #include <vector>
 

@@ -10,15 +10,16 @@
 #pragma once
 
 #include "point.hpp"
-
 #define FACE_POINTS 3
 
 class Face{
 public:
-    explicit Face(Point pts[FACE_POINTS]);
+    explicit Face(const int points[FACE_POINTS]);
     Face() = default;
     ~Face() = default;
 
+    auto& operator[](int i) {return this->points[i];}
+
 private:
-    std::array<Point, FACE_POINTS> points = {};
+    std::array<int, FACE_POINTS> points = {};
 };
