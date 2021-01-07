@@ -2,7 +2,7 @@
     Name: plot.py
     Purpose:
 
-    @author Bartosz Świtalski, Piotr Frątczak
+    Author: Bartosz Świtalski, Piotr Frątczak
 
     Warsaw University of Technology
     Faculty of Electronics and Information Technology

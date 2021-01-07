@@ -2,7 +2,7 @@
 *	Name:		point.hpp
 *	Purpose:
 *
-*	@author
+*	Author:     Piotr Frątczak, Bartosz Świtalski
 *
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
@@ -23,10 +23,6 @@ public:
     ~Point() = default;
 
     auto& operator[](int i) {return this->coords[i];}
-
-    inline double getX() { return coords[X]; }
-    inline double getY() { return coords[Y]; }
-    inline double getZ() { return coords[Z]; }
 
 private:
     std::array<double, POINT_COORDS> coords = {};

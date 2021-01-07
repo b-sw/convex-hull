@@ -2,7 +2,7 @@
 *	Name:		main.cpp
 *	Purpose:
 *
-*	@author
+*	Author:     Piotr Frątczak, Bartosz Świtalski
 *
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
