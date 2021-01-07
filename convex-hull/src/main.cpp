@@ -8,11 +8,9 @@
 *	Faculty of Electronics and Information Technology
 */
 #include "test.hpp"
-#include "../lib/generator.hpp"
 
 int main(int argc, char* argv[]){
     unitTests();
-    // std::vector<Point> points = Generator::generatePoints(1000, 10);
 
     /* TEMPORARY TESTS */
 //    std::cout << "Point test: ";
