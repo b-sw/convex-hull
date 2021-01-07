@@ -16,7 +16,8 @@ bool unitTests(){
     static testFunctions tests[] = {
             testPoint,
             testEdge,
-            testFace
+            testFace,
+            testGenerator
     };
 
     for(auto & test : tests) {
