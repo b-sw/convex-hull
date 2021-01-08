@@ -9,32 +9,28 @@
 */
 #pragma once
 
-#include "face.hpp"
 #include <fstream>
 #include <iostream>
+#include <vector>
+
+#include "face.hpp"
 
 #define POINTS_FILE "..\\convex-hull\\visuals\\points2.data"
 #define VERTICES_FILE "..\\convex-hull\\visuals\\vertices2.data"
 #define FACES_FILE "..\\convex-hull\\visuals\\faces2.data"
 #define SEPARATOR ';'
 #define WRITE_FILE std::ios::out
-#define SIZES 3
-#define POINTS_IDX 0
-#define VERTICES_IDX 1
-#define FACES_IDX 2
 
 class ConvexHull{
 public:
-    explicit ConvexHull(Point* points, int* vertices, Face* faces, const int sizes[SIZES]);
+    explicit ConvexHull(std::vector<Point> points, std::vector<int> vertices, std::vector<Face> faces);
     ConvexHull() = default;
     ~ConvexHull() = default;
 
     void save();
 
 private:
-    Point* points{};
-    int* vertices{};
-    Face* faces{};
-
-    std::array<int, SIZES> sizes = {};
+    std::vector<Point> points;
+    std::vector<int> vertices;
+    std::vector<Face> faces;
 };

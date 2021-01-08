@@ -13,8 +13,10 @@
 
 #include "point.hpp"
 
-namespace preprocessing{
-    std::vector<Point> preprocess(const std::vector<Point>& inputPoints, double d);
-    double maxCoord(const std::vector<Point>& points, int dim);
-    double minCoord(const std::vector<Point>& points, int dim);
+namespace preprocessing {
+    std::vector<Point> preprocess(const std::vector<Point> &inputPoints, double d);
+
+    double maxCoord(const std::vector<Point> &points, int dim);
+
+    double minCoord(const std::vector<Point> &points, int dim);
 }

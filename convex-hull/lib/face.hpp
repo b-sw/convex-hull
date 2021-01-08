@@ -18,7 +18,7 @@ public:
     Face() = default;
     ~Face() = default;
 
-    auto& operator[](int i) {return this->points[i];}
+    auto& operator[](int i) const {return this->points[i];}
 
 private:
     std::array<int, FACE_POINTS> points = {};
