@@ -41,8 +41,10 @@ bool testEdge(){
 }
 
 bool testFace(){
-    int pts[3] = {1, 2, 3};
-    Face* f = new Face(pts);
+    auto* p1 = new Point(1, 2, 3);
+    auto* p2 = new Point(4, 5, 6);
+    auto* p3 = new Point(7, 8, 9);
+    Face* f = new Face(*p1, *p2, *p3);
     assertm(f != nullptr, "Failed to construct a Face.");
     return true;
 }

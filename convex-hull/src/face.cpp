@@ -9,8 +9,8 @@
 */
 #include "face.hpp"
 
-Face::Face(const int points[FACE_POINTS]){
-    for(int i = 0; i < FACE_POINTS; ++i){
-        this->points[i] = points[i];
-    }
+Face::Face(Point point1, Point point2, Point point3) {
+    this->points[0] = point1;
+    this->points[1] = point2;
+    this->points[2] = point3;
 }

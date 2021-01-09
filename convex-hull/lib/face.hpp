@@ -14,12 +14,12 @@
 
 class Face{
 public:
-    explicit Face(const int points[FACE_POINTS]);
+    explicit Face(Point point1, Point point2, Point point3);
     Face() = default;
     ~Face() = default;
 
     auto& operator[](int i) const {return this->points[i];}
 
 private:
-    std::array<int, FACE_POINTS> points = {};
+    std::array<Point, FACE_POINTS> points = {};
 };

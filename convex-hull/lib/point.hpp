@@ -22,7 +22,10 @@ public:
     Point() = default;
     ~Point() = default;
 
-    auto& operator[](int i) const {return this->coords[i];}
+    auto& operator[](int i) const{return this->coords[i];}
+    friend bool operator==(const Point& a, const Point& b){
+        return a[X] == b[X] && a[Y] == b[Y] && a[Z] == b[Z];
+    }
 
 private:
     std::array<double, POINT_COORDS> coords = {};

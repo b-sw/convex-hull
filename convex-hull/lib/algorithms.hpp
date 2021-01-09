@@ -14,11 +14,13 @@
 #include "chull.hpp"
 
 namespace algorithms {
-    ConvexHull naive(std::vector<Point> points);
+    ConvexHull naive(const std::vector<Point>& points);
 
-    ConvexHull giftWrapping(std::vector<Point> points);
+    ConvexHull giftWrapping(const std::vector<Point> points);
 
-    ConvexHull incremental(std::vector<Point> points);
+    ConvexHull incremental(const std::vector<Point> points);
 
-    ConvexHull divideNConquer(std::vector<Point> points);
+    ConvexHull divideNConquer(const std::vector<Point> points);
+
+    bool isOutside(Point p1, Point p2, Point p3, Point tested);
 }

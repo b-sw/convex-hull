@@ -9,11 +9,25 @@
 */
 #include "chull.hpp"
 
-ConvexHull::ConvexHull(std::vector<Point> points, std::vector<int> vertices, std::vector<Face> faces) {
+ConvexHull::ConvexHull(std::vector<Point> points, std::set<int> vertices, std::vector<std::array<int, FACE_POINTS>> faces) {
     this->points = points;
     this->vertices = vertices;
     this->faces = faces;
 
+}
+
+ConvexHull::ConvexHull(std::vector<Point> points, std::vector<Face> faces) {
+    this->points = points;
+    for(auto const& face : faces){
+        std::array<int, FACE_POINTS> facePts;
+        for(int i=0; i<FACE_POINTS; ++i){
+            int index = getIndex(face[i]);
+            if(index == -1) continue; // TODO: exception
+            this->vertices.insert(index);
+            facePts[i] = index;
+        }
+        this->faces.push_back(facePts);
+    }
 }
 
 void ConvexHull::save() {
@@ -50,3 +64,13 @@ void ConvexHull::save() {
         std::cout << "ERROR: ostream failed.";
     }
 }
+
+int ConvexHull::getIndex(Point point) {
+    auto it = std::find(points.begin(), points.end(), point);
+    if(it != points.end()){
+        return it - points.begin();
+    }
+    // element not present in the vector
+    return -1;
+}
+
