@@ -21,6 +21,12 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/plot.py" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -93,6 +99,7 @@
       <option name="presentableId" value="Default" />
       <updated>1610202051892</updated>
       <workItem from="1610202053375" duration="324000" />
+      <workItem from="1610204805524" duration="3111000" />
     </task>
     <servers />
   </component>
@@ -100,13 +107,63 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="256" y="90" width="1243" height="689" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610202347023">
+    <state x="256" y="90" width="1243" height="689" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1610205455097">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
-    <state x="256" y="90" width="1243" height="689" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.870@0.0.1600.870" timestamp="1610202347023" />
+    <state x="256" y="90" width="1243" height="689" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1600.870@0.0.1600.870" timestamp="1610205455097" />
     <state x="582" y="191" key="FileChooserDialogImpl" timestamp="1610202273742">
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state x="582" y="191" key="FileChooserDialogImpl/0.0.1600.870@0.0.1600.870" timestamp="1610202273742" />
+    <state width="1558" height="280" key="GridCell.Tab.0.bottom" timestamp="1610208950644">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.0.bottom/0.0.1600.870@0.0.1600.870" timestamp="1610208950644" />
+    <state width="1558" height="280" key="GridCell.Tab.0.center" timestamp="1610208950644">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.0.center/0.0.1600.870@0.0.1600.870" timestamp="1610208950644" />
+    <state width="1558" height="280" key="GridCell.Tab.0.left" timestamp="1610208950644">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.0.left/0.0.1600.870@0.0.1600.870" timestamp="1610208950644" />
+    <state width="1558" height="280" key="GridCell.Tab.0.right" timestamp="1610208950644">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.0.right/0.0.1600.870@0.0.1600.870" timestamp="1610208950644" />
+    <state width="1558" height="280" key="GridCell.Tab.1.bottom" timestamp="1610208953907">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.1.bottom/0.0.1600.870@0.0.1600.870" timestamp="1610208953907" />
+    <state width="1558" height="280" key="GridCell.Tab.1.center" timestamp="1610208953907">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.1.center/0.0.1600.870@0.0.1600.870" timestamp="1610208953907" />
+    <state width="1558" height="280" key="GridCell.Tab.1.left" timestamp="1610208953907">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.1.left/0.0.1600.870@0.0.1600.870" timestamp="1610208953907" />
+    <state width="1558" height="280" key="GridCell.Tab.1.right" timestamp="1610208953907">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state width="1558" height="280" key="GridCell.Tab.1.right/0.0.1600.870@0.0.1600.870" timestamp="1610208953907" />
+    <state x="496" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1610204805880">
+      <screen x="0" y="0" width="1600" height="870" />
+    </state>
+    <state x="496" y="259" key="com.intellij.ide.util.TipDialog/0.0.1600.870@0.0.1600.870" timestamp="1610204805880" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/plot.py</url>
+          <line>81</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/visuals$plot.coverage" NAME="plot Coverage Results" MODIFIED="1610208950464" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

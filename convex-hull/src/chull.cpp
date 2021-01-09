@@ -42,9 +42,9 @@ void ConvexHull::save() {
                         << point[Z] << '\n';
         }
 
-        for(auto it = vertices.begin(); it != vertices.end(); ++it){
+        for(auto it = vertices.begin(); it != vertices.end();){
             vertices_file << *it;
-            if(it != vertices.end()){
+            if(++it != vertices.end()){
                 vertices_file << SEPARATOR;
             }
         }
