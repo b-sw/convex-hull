@@ -11,8 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import art3d
 import matplotlib.colors as colors
-# import scipy as sp
-# from scipy.spatial.qhull import ConvexHull
+import scipy as sp
+from scipy.spatial.qhull import ConvexHull
 
 LABELS = ['x', 'y', 'z']
 GRID_DIMENSIONS = 111
@@ -55,10 +55,6 @@ def plot_defining_vertices(ax, points, vertices):
     ax.plot(pts.T[X_VALUES], pts.T[Y_VALUES], pts.T[Z_VALUES], color=MARKER_COLOR, marker=MARKER, linestyle=LINESTYLE)
 
 
-# def plot_face(ax, face):
-#     ax.plot(face.T[X_VALUES], face.T[Y_VALUES], face.T[Z_VALUES], color=EDGE_COLOR, linestyle='-')
-#
-
 def color_face(ax, face):
     surface = art3d.Poly3DCollection(face)
     surface.set_color(colors.rgb2hex(np.random.rand(DIMENSIONS)))
@@ -79,9 +75,6 @@ def plot_convex_hull():
 
     for face in faces:
         face_pts = np.array([points[face[0]], points[face[1]], points[face[2]]])
-        print(face_pts)
-
-        # plot_face(ax, face_pts)
         color_face(ax, face_pts)
 
     # Make axis label
@@ -91,8 +84,30 @@ def plot_convex_hull():
     # plt.savefig('...')
 
 
+def debug_plot():
+    points = np.array(get_from_file(float, POINTS_FILE_NAME))
+
+    chull = ConvexHull(points)
+    vertices = chull.vertices
+    faces = chull.simplices
+
+    fig = plt.figure()
+    ax = fig.add_subplot(GRID_DIMENSIONS, projection=PROJECTION_TYPE)
+
+    plot_defining_vertices(ax, points, vertices)
+
+    for face in faces:
+        face_pts = np.array([points[face[0]], points[face[1]], points[face[2]]])
+        color_face(ax, face_pts)
+
+    for label in LABELS:
+        eval("ax.set_{:s}label('{:s}')".format(label, label))
+    plt.show()
+
+
 def main():
     plot_convex_hull()
+    debug_plot()
 
 
 if __name__ == '__main__':
