@@ -9,24 +9,26 @@
 */
 #include "chull.hpp"
 
-ConvexHull::ConvexHull(std::vector<Point> points, std::set<int> vertices, std::vector<std::array<int, FACE_POINTS>> faces) {
-    this->points = points;
-    this->vertices = vertices;
-    this->faces = faces;
+#include <utility>
+
+ConvexHull::ConvexHull(std::vector<Point> points, std::set<int> vertices, std::set<std::set<int>> faces) {
+    this->points = std::move(points);
+    this->vertices = std::move(vertices);
+    this->faces = std::move(faces);
 
 }
 
-ConvexHull::ConvexHull(std::vector<Point> points, std::vector<Face> faces) {
-    this->points = points;
+ConvexHull::ConvexHull(std::vector<Point> points, const std::vector<Face>& faces) {
+    this->points = std::move(points);
     for(auto const& face : faces){
-        std::array<int, FACE_POINTS> facePts;
+        std::set<int> facePts;
         for(int i=0; i<FACE_POINTS; ++i){
             int index = getIndex(face[i]);
             if(index == -1) continue; // TODO: exception
             this->vertices.insert(index);
-            facePts[i] = index;
+            facePts.insert(index);
         }
-        this->faces.push_back(facePts);
+        this->faces.insert(facePts);
     }
 }
 
@@ -51,9 +53,10 @@ void ConvexHull::save() {
         vertices_file << '\n';
 
         for(auto const& face : faces){
-            faces_file  << face[0] << SEPARATOR
-                        << face[1] << SEPARATOR
-                        << face[2] << '\n';
+            auto it = face.begin();
+            faces_file << *it++ << SEPARATOR
+                       << *it++ << SEPARATOR
+                       << *it << '\n';
         }
 
         points_file.close();

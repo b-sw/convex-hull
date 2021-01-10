@@ -24,8 +24,8 @@
 
 class ConvexHull{
 public:
-    explicit ConvexHull(std::vector<Point> points, std::set<int> vertices, std::vector<std::array<int, FACE_POINTS>> faces);
-    explicit ConvexHull(std::vector<Point> points, std::vector<Face> faces);
+    explicit ConvexHull(std::vector<Point> points, std::set<int> vertices, std::set<std::set<int>> faces);
+    explicit ConvexHull(std::vector<Point> points, const std::vector<Face>& faces);
     ConvexHull() = default;
     ~ConvexHull() = default;
 
@@ -34,7 +34,7 @@ public:
 private:
     std::vector<Point> points;
     std::set<int> vertices;
-    std::vector<std::array<int, FACE_POINTS>> faces;
+    std::set<std::set<int>> faces;
 
     int getIndex(Point point);
 };

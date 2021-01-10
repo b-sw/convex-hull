@@ -14,7 +14,7 @@
 
 #include "point.hpp"
 
-#define MU 5
+#define MU 0
 #define VAR 3
 
 namespace generator{

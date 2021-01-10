@@ -16,7 +16,7 @@ int main(int argc, char* argv[]){
 
     // TYMCZASOWE DEMO
     int n = 10;
-    std::vector<Point> pts = generator::generatePoints(1234,n);
+    std::vector<Point> pts = generator::generatePoints(99999,n);
     std::vector<Point> modelPts = preprocessing::preprocess(pts, 1.2);
 
     ConvexHull ch = algorithms::naive(modelPts);

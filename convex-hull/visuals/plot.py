@@ -99,6 +99,7 @@ def debug_plot():
     for face in faces:
         face_pts = np.array([points[face[0]], points[face[1]], points[face[2]]])
         color_face(ax, face_pts)
+        print(face)
 
     for label in LABELS:
         eval("ax.set_{:s}label('{:s}')".format(label, label))
