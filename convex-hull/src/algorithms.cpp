@@ -95,15 +95,15 @@ ConvexHull algorithms::incremental(const std::vector<Point>& points) {
                 std::vector<Edge> faceEdges = visibleFace.getEdges();
                 for(auto edge : faceEdges){
                     auto search = std::find(borderEdges.begin(), borderEdges.end(), edge);
-                    if(search != borderEdges.end()){    // if a border already appears in the set, it is a part of 2 visible faces, therefore it is not a border edge
-//                        borderEdges.erase(search, borderEdges.end());
-                        borderEdges.erase(std::remove(borderEdges.begin(), borderEdges.end(), edge), borderEdges.end());
+                    if(search != borderEdges.end()){
+                    /* if a border already appears in the set, it is a part of 2 visible faces,
+                     * therefore it is not a border edge */
+                        borderEdges.erase(search, borderEdges.end());
                     }
                     else {
                         borderEdges.push_back(edge);
                     }
                 }
-
                 chFaces.erase(std::remove(chFaces.begin(), chFaces.end(), visibleFace), chFaces.end());
             }
             for(auto edge : borderEdges){
@@ -126,6 +126,7 @@ bool algorithms::isVisible(Point p1, Point p2, Point p3, Point pt) {
  p3[X] p3[Y] p3[Z] 1
  pt[X] pt[Y] pt[Z] 1
 */
+    // determinant of the matrix above to calculate the volume of a tetrahedron described by given points
     double det =   1 * p2[Z] * p3[Y] * pt[X] - p1[Z] * 1 * p3[Y] * pt[X] - 1 * p2[Y] * p3[Z] * pt[X] + p1[Y] * 1 * p3[Z] * pt[X]
                  + p1[Z] * p2[Y] * 1 * pt[X] - p1[Y] * p2[Z] * 1 * pt[X] - 1 * p2[Z] * p3[X] * pt[Y] + p1[Z] * 1 * p3[X] * pt[Y]
                  + 1 * p2[X] * p3[Z] * pt[Y] - p1[X] * 1 * p3[Z] * pt[Y] - p1[Z] * p2[X] * 1 * pt[Y] + p1[X] * p2[Z] * 1 * pt[Y]
@@ -141,6 +142,7 @@ bool algorithms::isVisible(Face face, Point point) {
 }
 
 Face algorithms::firstFace(const std::vector<Point>& points) {
+    // First face found with the naive method
     for(auto const& point1 : points){
         for(auto const& point2 : points){
             if(point2 == point1) continue;
@@ -165,8 +167,9 @@ Face algorithms::firstFace(const std::vector<Point>& points) {
 }
 
 double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point point1, Point point2) {
+    // Edge points are lying on the intersection of two planes defined by 2 common edge points and another point
 
-    // First plane
+    // First plane's normal vector [a1, b1, c1]
     double a11 = edgePoint2[X] - edgePoint1[X];
     double b11 = edgePoint2[Y] - edgePoint1[Y];
     double c11 = edgePoint2[Z] - edgePoint1[Z];
@@ -177,7 +180,7 @@ double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point 
     double b1 = a12 * c11 - a11 * c12;
     double c1 = a11 * b12 - b11 * a12;
 
-    // First plane
+    // Second plane's normal vector [a2, b2, c2]
     double a21 = edgePoint2[X] - edgePoint1[X];
     double b21 = edgePoint2[Y] - edgePoint1[Y];
     double c21 = edgePoint2[Z] - edgePoint1[Z];

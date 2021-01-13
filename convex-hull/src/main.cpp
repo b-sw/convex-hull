@@ -19,6 +19,6 @@ int main(int argc, char* argv[]){
     std::vector<Point> pts = generator::generatePoints(234098,n);
     std::vector<Point> modelPts = preprocessing::preprocess(pts, 1.2);
 
-    ConvexHull ch = algorithms::incremental(modelPts);
+    ConvexHull ch = algorithms::giftWrapping(modelPts);
     ch.save();
 }
