@@ -9,8 +9,7 @@
 */
 #include "edge.hpp"
 
-Edge::Edge(const int points[EDGE_POINTS]){
-    for(int i = 0; i < EDGE_POINTS; ++i){
-        this->points[i] = points[i];
-    }
+Edge::Edge(Point point1, Point point2){
+    this->points[0] = point1;
+    this->points[1] = point2;
 }

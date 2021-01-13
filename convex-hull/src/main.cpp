@@ -15,10 +15,10 @@ int main(int argc, char* argv[]){
     unitTests();
 
     // TYMCZASOWE DEMO
-    int n = 10;
-    std::vector<Point> pts = generator::generatePoints(99999,n);
+    int n = 5;
+    std::vector<Point> pts = generator::generatePoints(234098,n);
     std::vector<Point> modelPts = preprocessing::preprocess(pts, 1.2);
 
-    ConvexHull ch = algorithms::naive(modelPts);
+    ConvexHull ch = algorithms::incremental(modelPts);
     ch.save();
 }

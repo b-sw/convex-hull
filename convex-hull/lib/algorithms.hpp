@@ -9,7 +9,7 @@
 */
 #pragma once
 
-#include <vector>
+#include <unordered_set>
 
 #include "chull.hpp"
 
@@ -24,11 +24,10 @@ namespace algorithms {
 
     ConvexHull divideNConquer(const std::vector<Point>& points);
 
-    bool isOutside(Point p1, Point p2, Point p3, Point tested);
+    bool isVisible(Point p1, Point p2, Point p3, Point pt);
+    bool isVisible(Face face, Point point);
 
     Face firstFace(const std::vector<Point>& points);
-
-    std::vector<Face> firstFour(const std::vector<Point>& points);
 
     double angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point point1, Point point2);
 }

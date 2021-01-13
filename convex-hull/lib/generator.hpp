@@ -15,7 +15,7 @@
 #include "point.hpp"
 
 #define MU 0
-#define VAR 3
+#define VAR 10
 
 namespace generator{
     std::vector<Point> generatePoints(int seed, int n);

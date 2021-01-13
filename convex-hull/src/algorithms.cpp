@@ -10,7 +10,7 @@
 #include "algorithms.hpp"
 
 ConvexHull algorithms::naive(const std::vector<Point>& points){
-    std::vector<Face> faces;
+    std::vector<Face> chFaces;
     for(auto const& point1 : points){
         for(auto const& point2 : points){
             if(point2 == point1) continue;
@@ -20,29 +20,29 @@ ConvexHull algorithms::naive(const std::vector<Point>& points){
                 bool isFace = true;
                 for(auto const& pointExt : points){
                     if(pointExt == point1 || pointExt == point2 || pointExt == point3) continue;
-                    if(isOutside(point1, point2, point3, pointExt)){
+                    if(isVisible(point1, point2, point3, pointExt)){
                         isFace = false;
                         break;
                     }
                 }
                 if(isFace){
-                    faces.push_back( *(new Face(point1, point2, point3)) );
+                    chFaces.push_back(*(new Face(point1, point2, point3)) );
                 }
             }
         }
     }
-    return *(new ConvexHull(points, faces));
+    return *(new ConvexHull(points, chFaces));
 }
 
 ConvexHull algorithms::giftWrapping(const std::vector<Point>& points) {
-    std::vector<Face> faces;
+    std::vector<Face> chFaces;
     std::vector<Edge> visitedEdges;
 
     Face first = firstFace(points);
-    faces.push_back(first);
+    chFaces.push_back(first);
     int facesSize = 1;
     for(int i=0; i<facesSize; ++i){
-        Face curFace = faces.at(i);
+        Face curFace = chFaces.at(i);
         for(int i=0; i<FACE_POINTS; ++i){
             Point edgePoint1 = curFace[i];
             Point edgePoint2 = curFace[(i+1) % FACE_POINTS];
@@ -62,42 +62,64 @@ ConvexHull algorithms::giftWrapping(const std::vector<Point>& points) {
                 }
             }
             Face* face = new Face(edgePoint1, edgePoint2, nextHullPoint);
-            faces.push_back(*face);
+            chFaces.push_back(*face);
             ++facesSize;
             visitedEdges.push_back(*edge);
         }
     }
 
-    return *(new ConvexHull(points, faces));
+    return *(new ConvexHull(points, chFaces));
 }
 
-//ConvexHull algorithms::incremental(const std::vector<Point>& points) {
-//    std::vector<Face> faces;
-//
-//    std::vector<Face> firstTwoFaces = firstFour(points);
-//    faces.push_back(firstTwoFaces.at(0));
-//    faces.push_back(firstTwoFaces.at(1));
-//    std::vector<Point> pointCloud = points;
-//    pointCloud.erase(std::remove(pointCloud.begin(), pointCloud.end(), firstTwoFaces.at(0)[0]), pointCloud.end());
-//    pointCloud.erase(std::remove(pointCloud.begin(), pointCloud.end(), firstTwoFaces.at(0)[1]), pointCloud.end());
-//    pointCloud.erase(std::remove(pointCloud.begin(), pointCloud.end(), firstTwoFaces.at(0)[2]), pointCloud.end());
-//    pointCloud.erase(std::remove(pointCloud.begin(), pointCloud.end(), firstTwoFaces.at(1)[2]), pointCloud.end());
-//    for(int i=0; i<pointCloud.size(); ++i){
-//        for(auto face : faces){
-//
-//        }
-//    }
-//
-//
-//
-//    return *(new ConvexHull());
-//}
+ConvexHull algorithms::incremental(const std::vector<Point>& points) {
+    std::vector<Face> chFaces;
+
+    const int four = 4;
+    for(int i=0; i<four; ++i){
+        Point p1 = points.at(i);
+        Point p2 = points.at((i+1) % four);
+        Point p3 = points.at((i+2) % four);
+        chFaces.push_back(*(new Face(p1, p2, p3)) );
+    }
+
+    for(int i=4; i<points.size(); ++i){
+        std::vector<Face> visibleFaces;
+        for(auto face : chFaces){
+            if(isVisible(face, points.at(i))) visibleFaces.push_back(face);
+        }
+
+        if(visibleFaces.empty()) continue;
+        else {
+            std::vector<Edge> borderEdges;
+            for(auto visibleFace : visibleFaces){
+                std::vector<Edge> faceEdges = visibleFace.getEdges();
+                for(auto edge : faceEdges){
+                    auto search = std::find(borderEdges.begin(), borderEdges.end(), edge);
+                    if(search != borderEdges.end()){    // if a border already appears in the set, it is a part of 2 visible faces, therefore it is not a border edge
+//                        borderEdges.erase(search, borderEdges.end());
+                        borderEdges.erase(std::remove(borderEdges.begin(), borderEdges.end(), edge), borderEdges.end());
+                    }
+                    else {
+                        borderEdges.push_back(edge);
+                    }
+                }
+
+                chFaces.erase(std::remove(chFaces.begin(), chFaces.end(), visibleFace), chFaces.end());
+            }
+            for(auto edge : borderEdges){
+                chFaces.push_back(*(new Face(edge[0], edge[1], points.at(i))) );
+            }
+        }
+    }
+
+    return *(new ConvexHull(points, chFaces));
+}
 
 ConvexHull algorithms::divideNConquer(const std::vector<Point>& points) {
     return *(new ConvexHull());
 }
 
-bool algorithms::isOutside(Point p1, Point p2, Point p3, Point pt) {
+bool algorithms::isVisible(Point p1, Point p2, Point p3, Point pt) {
 /*
  p1[X] p1[Y] p1[Z] 1
  p2[X] p2[Y] p2[Z] 1
@@ -114,6 +136,10 @@ bool algorithms::isOutside(Point p1, Point p2, Point p3, Point pt) {
     return det < 0;
 }
 
+bool algorithms::isVisible(Face face, Point point) {
+    return isVisible(face[0], face[1], face[2], point);
+}
+
 Face algorithms::firstFace(const std::vector<Point>& points) {
     for(auto const& point1 : points){
         for(auto const& point2 : points){
@@ -124,7 +150,7 @@ Face algorithms::firstFace(const std::vector<Point>& points) {
                 bool isFace = true;
                 for(auto const& pointExt : points){
                     if(pointExt == point1 || pointExt == point2 || pointExt == point3) continue;
-                    if(isOutside(point1, point2, point3, pointExt)){
+                    if(isVisible(point1, point2, point3, pointExt)){
                         isFace = false;
                         break;
                     }
@@ -136,28 +162,6 @@ Face algorithms::firstFace(const std::vector<Point>& points) {
         }
     }
     return Face();
-}
-
-std::vector<Face> algorithms::firstFour(const std::vector<Point>& points){
-    std::vector<Face> firstFaces;
-    Face first = firstFace(points);
-    firstFaces.push_back(first);
-    Edge edge = *(new Edge(first[0], first[1]));
-    for(auto const& point : points){
-        if(point == edge[0] || point == edge[1] || point == first[2]) continue;
-        bool isFace = true;
-        for(auto const& pointExt : points){
-            if(pointExt == edge[0] || pointExt == edge[1] || pointExt == point || pointExt == first[2]) continue;
-            if(isOutside(edge[0], edge[1], point, pointExt)){
-                isFace = false;
-                break;
-            }
-        }
-        if(isFace){
-            firstFaces.push_back(*(new Face(edge[0], edge[1], point)));
-            return firstFaces;
-        }
-    }
 }
 
 double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point point1, Point point2) {

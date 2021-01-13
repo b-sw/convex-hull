@@ -34,8 +34,9 @@ bool testPoint(){
 }
 
 bool testEdge(){
-    int pts[2] = {5,8};
-    Edge* e = new Edge(pts);
+    auto* p1 = new Point(1, 2, 3);
+    auto* p2 = new Point(4, 5, 6);
+    Edge* e = new Edge(*p1, *p2);
     assertm(e != nullptr, "Failed to construct an Edge.");
     return true;
 }

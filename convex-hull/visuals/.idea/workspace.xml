@@ -28,7 +28,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="PyScientificConfigurable" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
@@ -57,6 +57,9 @@
       <module name="visuals" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="C:\Users\pitf9\PycharmProjects\iris\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="false" />
@@ -103,7 +106,8 @@
       <workItem from="1610202053375" duration="324000" />
       <workItem from="1610204805524" duration="4551000" />
       <workItem from="1610214992777" duration="550000" />
-      <workItem from="1610216243543" duration="1921000" />
+      <workItem from="1610216243543" duration="14113000" />
+      <workItem from="1610541909601" duration="1118000" />
     </task>
     <servers />
   </component>
@@ -155,13 +159,15 @@
       <screen x="0" y="0" width="1600" height="870" />
     </state>
     <state width="1558" height="280" key="GridCell.Tab.1.right/0.0.1600.870@0.0.1600.870" timestamp="1610210425774" />
-    <state x="400" y="86" key="SettingsEditor" timestamp="1610215372919">
-      <screen x="0" y="0" width="1600" height="870" />
+    <state x="640" y="139" key="SettingsEditor" timestamp="1610278874576">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state x="640" y="139" key="SettingsEditor/-3200.508.1600.885/0.0.2560.1410@0.0.2560.1410" timestamp="1610278874576" />
     <state x="400" y="86" key="SettingsEditor/0.0.1600.870@0.0.1600.870" timestamp="1610215372919" />
-    <state x="496" y="259" key="com.intellij.ide.util.TipDialog" timestamp="1610216363982">
-      <screen x="0" y="0" width="1600" height="870" />
+    <state x="-6" y="1" width="2572" height="1415" key="com.intellij.ide.util.TipDialog" timestamp="1610542849532">
+      <screen x="0" y="0" width="2560" height="1410" />
     </state>
+    <state x="-6" y="1" width="2572" height="1415" key="com.intellij.ide.util.TipDialog/-3200.508.1600.885/0.0.2560.1410@0.0.2560.1410" timestamp="1610542849532" />
     <state x="496" y="259" key="com.intellij.ide.util.TipDialog/0.0.1600.870@0.0.1600.870" timestamp="1610216363982" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">

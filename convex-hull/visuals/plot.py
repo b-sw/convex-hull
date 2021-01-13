@@ -29,7 +29,7 @@ POINTS_FILE_NAME = 'points.data'
 VERTICES_FILE_NAME = 'vertices.data'
 FACES_FILE_NAME = 'faces.data'
 SEPARATOR = ';'
-ALPHA = 0.8
+ALPHA = 0.95
 DIMENSIONS = 3
 
 
