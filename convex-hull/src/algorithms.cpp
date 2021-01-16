@@ -7,6 +7,7 @@
 *	Warsaw University of Technology
 *	Faculty of Electronics and Information Technology
 */
+#include <algorithm>
 #include "algorithms.hpp"
 
 ConvexHull algorithms::naive(const std::vector<Point>& points){
@@ -115,9 +116,16 @@ ConvexHull algorithms::incremental(const std::vector<Point>& points) {
     return *(new ConvexHull(points, chFaces));
 }
 
-ConvexHull algorithms::divideNConquer(const std::vector<Point>& points) {
-    return *(new ConvexHull());
+ConvexHull algorithms::divideNConquer(std::vector<Point> points) {
+    std::sort(points.begin(), points.end(), [](const Point& a, const Point& b){
+        return a[X] < b[X];
+    });
+    std::vector<Face> chFaces = recursiveHull(points);
+    return *(new ConvexHull(points, chFaces));
 }
+
+// HELPER FUNCTIONS
+
 
 bool algorithms::isVisible(Point p1, Point p2, Point p3, Point pt) {
 /*
@@ -134,6 +142,7 @@ bool algorithms::isVisible(Point p1, Point p2, Point p3, Point pt) {
                  + p1[Y] * p2[X] * 1 * pt[Z] - p1[X] * p2[Y] * 1 * pt[Z] - p1[Z] * p2[Y] * p3[X] * 1 + p1[Y] * p2[Z] * p3[X] * 1
                  + p1[Z] * p2[X] * p3[Y] * 1 - p1[X] * p2[Z] * p3[Y] * 1 - p1[Y] * p2[X] * p3[Z] * 1 + p1[X] * p2[Y] * p3[Z] * 1;
 
+    // if the volume is < 0, the base of the tetrahedron (p1, p2, p3) is not visible from outside the hull
     return det < 0;
 }
 
@@ -199,4 +208,30 @@ double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point 
     double angle = (180 / pi) * (acos(d));
 
     return angle;
+}
+
+std::vector<Face> algorithms::recursiveHull(const std::vector<Point>& points) {
+    std::vector<Face> convexHull;
+    if(points.size() == 4){
+        for(int i=0; i<4; ++i){
+            Point p1 = points.at(i);
+            Point p2 = points.at((i+1) % 4);
+            Point p3 = points.at((i+2) % 4);
+            convexHull.push_back( *(new Face(p1, p2, p3)) );
+        }
+    }
+    else {
+        const std::size_t halfSize = points.size() / 2;
+        std::vector<Point> points1(points.begin(), points.begin() + halfSize);
+        std::vector<Point> points2(points.begin() + halfSize, points.end());
+        std::vector<Face> chFaces1 = recursiveHull(points1);
+        std::vector<Face> chFaces2 = recursiveHull(points2);
+        convexHull = mergeHulls(chFaces1, chFaces2);
+    }
+    return convexHull;
+}
+
+std::vector<Face> algorithms::mergeHulls(std::vector<Face> hull1, std::vector<Face> hull2) {
+    std::vector<Face> merged;
+    return merged;
 }
