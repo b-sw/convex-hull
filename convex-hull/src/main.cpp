@@ -9,7 +9,7 @@
 */
 #include "test.hpp"
 #include "preprocessing.hpp"
-#include "algorithms.hpp"
+#include "stopwatch.hpp"
 
 int main(int argc, char* argv[]){
     unitTests();
@@ -19,6 +19,10 @@ int main(int argc, char* argv[]){
     std::vector<Point> pts = generator::generatePoints(234099,n);
     std::vector<Point> modelPts = preprocessing::preprocess(pts, 1.2);
 
-    ConvexHull ch = algorithms::incremental(modelPts);
-    ch.save();
+    auto* stopwatch = new Stopwatch();
+    stopwatch->timeForN(10, modelPts, algorithms::giftWrapping);
+    stopwatch->write();
+
+//    ConvexHull ch = algorithms::incremental(modelPts);
+//    ch.save();
 }

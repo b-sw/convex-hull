@@ -12,6 +12,7 @@
 
 ConvexHull algorithms::naive(const std::vector<Point>& points){
     std::vector<Face> chFaces;
+
     for(auto const& point1 : points){
         for(auto const& point2 : points){
             if(point2 == point1) continue;
@@ -32,6 +33,7 @@ ConvexHull algorithms::naive(const std::vector<Point>& points){
             }
         }
     }
+
     return *(new ConvexHull(points, chFaces));
 }
 
@@ -44,10 +46,10 @@ ConvexHull algorithms::giftWrapping(const std::vector<Point>& points) {
     int facesSize = 1;
     for(int i=0; i<facesSize; ++i){
         Face curFace = chFaces.at(i);
-        for(int i=0; i<FACE_POINTS; ++i){
-            Point edgePoint1 = curFace[i];
-            Point edgePoint2 = curFace[(i+1) % FACE_POINTS];
-            Point oppositePoint = curFace[(i+2) % FACE_POINTS];
+        for(int j=0; j < FACE_POINTS; ++j){
+            Point edgePoint1 = curFace[j];
+            Point edgePoint2 = curFace[(j + 1) % FACE_POINTS];
+            Point oppositePoint = curFace[(j + 2) % FACE_POINTS];
             Edge* edge = new Edge(edgePoint1, edgePoint2);
             if(std::find(visitedEdges.begin(), visitedEdges.end(), *edge) != visitedEdges.end()) continue;
 
@@ -69,18 +71,18 @@ ConvexHull algorithms::giftWrapping(const std::vector<Point>& points) {
         }
     }
 
+
     return *(new ConvexHull(points, chFaces));
 }
 
 ConvexHull algorithms::incremental(const std::vector<Point>& points) {
     std::vector<Face> chFaces;
 
-    const int four = 4;
-    for(int i=0; i<four; ++i){
+    for(int i=0; i<FOUR; ++i){
         Point p1 = points.at(i);
-        Point p2 = points.at((i+1) % four);
-        Point p3 = points.at((i+2) % four);
-        Point p4 = points.at((i+3) % four);
+        Point p2 = points.at((i+1) % FOUR);
+        Point p3 = points.at((i+2) % FOUR);
+        Point p4 = points.at((i+3) % FOUR);
         Face* tmpFace = new Face(p1, p2, p3);
 
         if(isVisible(*tmpFace, p4)){
@@ -128,7 +130,6 @@ ConvexHull algorithms::incremental(const std::vector<Point>& points) {
                 Face* tmpF2 = new Face(points.at(i), edge[1], edge[0]);
 
                 Point samplePoint;
-                Face sampleFace = chFaces.at(0);
                 for(auto face : chFaces){
                     samplePoint = face[0];
                     if(!(samplePoint == points.at(i)) && !(samplePoint == edge[0]) && !(samplePoint == edge[1]))
@@ -270,4 +271,40 @@ std::vector<Face> algorithms::recursiveHull(const std::vector<Point>& points) {
 std::vector<Face> algorithms::mergeHulls(std::vector<Face> hull1, std::vector<Face> hull2) {
     std::vector<Face> merged;
     return merged;
+}
+
+void ConvexHull::save() {
+    try{
+        std::ofstream points_file   (POINTS_FILE, WRITE_FILE);
+        std::ofstream vertices_file (VERTICES_FILE, WRITE_FILE);
+        std::ofstream faces_file    (FACES_FILE, WRITE_FILE);
+
+        for(auto const& point : points){
+            points_file << point[X] << SEPARATOR
+                        << point[Y] << SEPARATOR
+                        << point[Z] << '\n';
+        }
+
+        for(auto it = vertices.begin(); it != vertices.end();){
+            vertices_file << *it;
+            if(++it != vertices.end()){
+                vertices_file << SEPARATOR;
+            }
+        }
+        vertices_file << '\n';
+
+        for(auto const& face : faces){
+            auto it = face.begin();
+            faces_file << *it++ << SEPARATOR
+                       << *it++ << SEPARATOR
+                       << *it << '\n';
+        }
+
+        points_file.close();
+        vertices_file.close();
+        faces_file.close();
+    }
+    catch(const std::ofstream::failure& e){
+        std::cout << "ERROR: ostream failed.";
+    }
 }
