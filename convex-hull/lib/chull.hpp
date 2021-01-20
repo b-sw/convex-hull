@@ -13,6 +13,7 @@
 #include <iostream>
 #include <vector>
 #include <set>
+#include <algorithm>
 
 #include "face.hpp"
 
@@ -30,6 +31,9 @@ public:
     ~ConvexHull() = default;
 
     void save();
+    std::set<std::set<int>> getFaces(){
+        return this->faces;
+    }
 
 private:
     std::vector<Point> points;

@@ -10,6 +10,7 @@
 #pragma once
 
 #include <unordered_set>
+#include <cmath>
 
 #include "chull.hpp"
 

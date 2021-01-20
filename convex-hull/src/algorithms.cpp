@@ -80,13 +80,25 @@ ConvexHull algorithms::incremental(const std::vector<Point>& points) {
         Point p1 = points.at(i);
         Point p2 = points.at((i+1) % four);
         Point p3 = points.at((i+2) % four);
-        chFaces.push_back(*(new Face(p1, p2, p3)) );
+        Point p4 = points.at((i+3) % four);
+        Face* tmpFace = new Face(p1, p2, p3);
+
+        if(isVisible(*tmpFace, p4)){
+            chFaces.push_back(*(new Face(p1, p3, p2)) );
+            delete tmpFace;
+        }
+        else{
+            chFaces.push_back(*tmpFace);
+        }
+
     }
 
     for(int i=4; i<points.size(); ++i){
         std::vector<Face> visibleFaces;
         for(auto face : chFaces){
-            if(isVisible(face, points.at(i))) visibleFaces.push_back(face);
+            if(isVisible(face, points.at(i))){
+                visibleFaces.push_back(face);
+            }
         }
 
         if(visibleFaces.empty()) continue;
@@ -99,17 +111,40 @@ ConvexHull algorithms::incremental(const std::vector<Point>& points) {
                     if(search != borderEdges.end()){
                     /* if a border already appears in the set, it is a part of 2 visible faces,
                      * therefore it is not a border edge */
-                        borderEdges.erase(search, borderEdges.end());
+                        borderEdges.erase(search);
                     }
                     else {
                         borderEdges.push_back(edge);
                     }
                 }
-                chFaces.erase(std::remove(chFaces.begin(), chFaces.end(), visibleFace), chFaces.end());
             }
+            for(auto face : visibleFaces){
+                auto search = std::find(chFaces.begin(), chFaces.end(), face);
+                chFaces.erase(search);
+            }
+
             for(auto edge : borderEdges){
-                chFaces.push_back(*(new Face(edge[0], edge[1], points.at(i))) );
+                Face* tmpF = new Face(points.at(i), edge[0], edge[1]);
+                Face* tmpF2 = new Face(points.at(i), edge[1], edge[0]);
+
+                Point samplePoint;
+                Face sampleFace = chFaces.at(0);
+                for(auto face : chFaces){
+                    samplePoint = face[0];
+                    if(!(samplePoint == points.at(i)) && !(samplePoint == edge[0]) && !(samplePoint == edge[1]))
+                        break;
+                }
+
+                if(isVisible(*tmpF, samplePoint)){
+                    delete tmpF;
+                    chFaces.push_back(*(tmpF2));
+                }else{
+                    delete tmpF2;
+                    chFaces.push_back(*(tmpF));
+                }
+
             }
+
         }
     }
 
@@ -143,6 +178,7 @@ bool algorithms::isVisible(Point p1, Point p2, Point p3, Point pt) {
                  + p1[Z] * p2[X] * p3[Y] * 1 - p1[X] * p2[Z] * p3[Y] * 1 - p1[Y] * p2[X] * p3[Z] * 1 + p1[X] * p2[Y] * p3[Z] * 1;
 
     // if the volume is < 0, the base of the tetrahedron (p1, p2, p3) is not visible from outside the hull
+    //std::cout<<det;
     return det < 0;
 }
 

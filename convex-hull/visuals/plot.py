@@ -29,7 +29,7 @@ POINTS_FILE_NAME = 'points.data'
 VERTICES_FILE_NAME = 'vertices.data'
 FACES_FILE_NAME = 'faces.data'
 SEPARATOR = ';'
-ALPHA = 0.95
+ALPHA = 0.5
 DIMENSIONS = 3
 
 
@@ -68,7 +68,7 @@ def plot_convex_hull():
     vertices = np.array(get_from_file(int, VERTICES_FILE_NAME)[0])
     faces = np.array(get_from_file(int, FACES_FILE_NAME))
 
-    fig = plt.figure()
+    fig = plt.figure(num='nasza')
     ax = fig.add_subplot(GRID_DIMENSIONS, projection=PROJECTION_TYPE)
 
     plot_defining_vertices(ax, points, vertices)
@@ -91,7 +91,7 @@ def debug_plot():
     vertices = chull.vertices
     faces = chull.simplices
 
-    fig = plt.figure()
+    fig = plt.figure(num='debug')
     ax = fig.add_subplot(GRID_DIMENSIONS, projection=PROJECTION_TYPE)
 
     plot_defining_vertices(ax, points, vertices)
