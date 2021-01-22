@@ -9,17 +9,17 @@
 */
 #include "inputHandler.hpp"
 
-int inputHandlers::getInt(int argc, char **argv, const char* flag) {
+int inputHandlers::getInt(int argc, char **argv, const char* flag, int size) {
     for(int i = 0; i < argc; ++i){
-        if(argv[i] == flag) return std::stoi(argv[i+1]);
+        if(strncmp(argv[i], flag, size) == 0) return std::stoi(argv[i+1]);
     }
 
     return -1;
 }
 
-std::string inputHandlers::getString(int argc, char **argv, const char* flag) {
+std::string inputHandlers::getString(int argc, char **argv, const char* flag, int size) {
     for(int i = 0; i < argc; ++i){
-        if(argv[i] == flag) return argv[i+1];
+        if(strncmp(argv[i], flag, size) == 0) return argv[i+1];
     }
 
     return "";
