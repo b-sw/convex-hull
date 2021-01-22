@@ -11,12 +11,11 @@
 #include "stopwatch.hpp"
 #include "inputHandler.hpp"
 
-#define READ_FROM_FILE 7
-#define AUTOMATIC_GENERATION 11
+#define READ_FROM_FILE 5
+#define AUTOMATIC_GENERATION 9
 #define AUTOMATIC_TESTING 15
 
 #define FLAG_IN "-in"
-#define FLAG_OUT "-out"
 #define FLAG_N "-n"
 #define FLAG_D "-d"
 #define FLAG_SEED "-seed"
@@ -30,9 +29,8 @@ int main(int argc, char* argv[]){
 
     if(argc == READ_FROM_FILE){
         std::string inFile = inputHandlers::getString(argc, argv, FLAG_IN, 3);
-        std::string outFile = inputHandlers::getString(argc, argv, FLAG_OUT, 4);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
-        //std::vector<Point> pts = getPointsFromFile(inFile);
+        std::vector<Point> pts = getPointsFromFile(inFile);
 
         // todo: stopwach cos tam
 
@@ -40,7 +38,6 @@ int main(int argc, char* argv[]){
         int n = inputHandlers::getInt(argc, argv, FLAG_N, 2);
         int d = inputHandlers::getInt(argc, argv, FLAG_D, 2);
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
-        std::string outFile = inputHandlers::getString(argc, argv, FLAG_OUT, 4);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
 
         // todo: stopwatch cos tam
@@ -54,7 +51,9 @@ int main(int argc, char* argv[]){
         int r = inputHandlers::getInt(argc, argv, FLAG_R, 2);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
 
-        // todo: stopwatch cos tam
+        auto* stopwatch = new Stopwatch();
+        stopwatch->examineAlgorithm(n, seed, d, p, step, r, algorithms::naive);
+        stopwatch->save();
 
     }else{
         std::cout << "No to klaps" << std::endl;
