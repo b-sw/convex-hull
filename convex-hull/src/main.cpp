@@ -53,11 +53,18 @@ int main(int argc, char* argv[]){
         // todo: stopwatch cos tam
 
     }else{
-        std::cout << "No to klaps";
+        std::cout << "No to klaps" << std::endl;
         // TYMCZASOWE DEMO
 
+        int points       = 50;
+        int seed         = 12345;
+        double precision = 1.5;
+        int problems     = 20;
+        int step         = 3;
+        int runs         = 10;
+
         auto* stopwatch = new Stopwatch();
-        stopwatch->examineAlgorithm(5, 1234, 1.4, 5, 2, 3, algorithms::giftWrapping);
+        stopwatch->examineAlgorithm(points, seed, precision, problems, step, runs, algorithms::naive);
         stopwatch->save();
     }
 

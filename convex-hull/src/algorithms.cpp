@@ -245,7 +245,7 @@ int algorithms::getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vect
         return n*n*n*n;
     }
     if(algorithm == giftWrapping){
-        return n*n*n;
+        return n*n;
     }
     if(algorithm == incremental){
         n*n;

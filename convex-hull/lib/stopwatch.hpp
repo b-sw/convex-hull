@@ -18,7 +18,7 @@
 #include "preprocessing.hpp"
 
 
-#define TIMES_FILE "..\\convex-hull\\times\\times.data"
+#define TIMES_FILE "../convex-hull/times/times.data"
 #define WRITE_FILE std::ios::out
 #define SEPARATOR ';'
 

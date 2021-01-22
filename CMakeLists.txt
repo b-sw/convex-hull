@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16.3)
 project(convex_hull)
 
 set(CMAKE_CXX_STANDARD 14)
@@ -24,4 +24,6 @@ add_executable(convex_hull
         convex-hull/src/algorithms.cpp
         convex-hull/lib/algorithms.hpp
         convex-hull/src/stopwatch.cpp
-        convex-hull/lib/stopwatch.hpp convex-hull/lib/inputHandler.hpp convex-hull/src/inputHandler.cpp)
+        convex-hull/lib/stopwatch.hpp
+        convex-hull/lib/inputHandler.hpp
+        convex-hull/src/inputHandler.cpp)
