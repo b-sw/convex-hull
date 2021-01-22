@@ -30,3 +30,5 @@ public:
 private:
     std::array<double, POINT_COORDS> coords = {};
 };
+
+std::vector<Point> getPointsFromFile(const std::string& fileName);
