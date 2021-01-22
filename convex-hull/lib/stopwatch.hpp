@@ -10,11 +10,17 @@
 #pragma once
 
 #include <chrono>
+#include <map>
+#include <utility>
 
 #include "algorithms.hpp"
+#include "generator.hpp"
+#include "preprocessing.hpp"
+
 
 #define TIMES_FILE "..\\convex-hull\\times\\times.data"
-//#define WRITE_FILE std::ios::out
+#define WRITE_FILE std::ios::out
+#define SEPARATOR ';'
 
 class Stopwatch {
 public:
@@ -23,10 +29,14 @@ public:
 
     auto timeAlgorithm(const std::vector<Point>& points, ConvexHull algorithm(const std::vector<Point>&));
 
-    void timeForN(int n, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&));
+    int timeAverageNRuns(int runs, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&));
 
-    void write();
+    void examineAlgorithm(int points, int seed, double precision, int problems, int step, int runs, ConvexHull (*algorithm)(const std::vector<Point>&));
+
+    void save();
 
 private:
-//    std::vector<int> times;
+    std::map<int,std::pair<int,double>> scores;
+
+    std::vector<int> keys;
 };

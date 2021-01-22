@@ -23,8 +23,6 @@ namespace algorithms {
 
     ConvexHull incremental(const std::vector<Point>& points);
 
-    ConvexHull divideNConquer(std::vector<Point> points);
-
     bool isVisible(Point p1, Point p2, Point p3, Point pt);
 
     bool isVisible(Face face, Point point);
@@ -33,7 +31,5 @@ namespace algorithms {
 
     double angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point point1, Point point2);
 
-    std::vector<Face> recursiveHull(const std::vector<Point>& points);
-
-    std::vector<Face> mergeHulls(std::vector<Face> hull1, std::vector<Face> hull2);
+    int getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&));
 }

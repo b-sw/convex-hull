@@ -152,13 +152,6 @@ ConvexHull algorithms::incremental(const std::vector<Point>& points) {
     return *(new ConvexHull(points, chFaces));
 }
 
-ConvexHull algorithms::divideNConquer(std::vector<Point> points) {
-    std::sort(points.begin(), points.end(), [](const Point& a, const Point& b){
-        return a[X] < b[X];
-    });
-    std::vector<Face> chFaces = recursiveHull(points);
-    return *(new ConvexHull(points, chFaces));
-}
 
 // HELPER FUNCTIONS
 
@@ -247,64 +240,15 @@ double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point 
     return angle;
 }
 
-std::vector<Face> algorithms::recursiveHull(const std::vector<Point>& points) {
-    std::vector<Face> convexHull;
-    if(points.size() == 4){
-        for(int i=0; i<4; ++i){
-            Point p1 = points.at(i);
-            Point p2 = points.at((i+1) % 4);
-            Point p3 = points.at((i+2) % 4);
-            convexHull.push_back( *(new Face(p1, p2, p3)) );
-        }
+int algorithms::getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&)){
+    if(algorithm == naive){
+        return n*n*n*n;
     }
-    else {
-        const std::size_t halfSize = points.size() / 2;
-        std::vector<Point> points1(points.begin(), points.begin() + halfSize);
-        std::vector<Point> points2(points.begin() + halfSize, points.end());
-        std::vector<Face> chFaces1 = recursiveHull(points1);
-        std::vector<Face> chFaces2 = recursiveHull(points2);
-        convexHull = mergeHulls(chFaces1, chFaces2);
+    if(algorithm == giftWrapping){
+        return n*n*n;
     }
-    return convexHull;
-}
-
-std::vector<Face> algorithms::mergeHulls(std::vector<Face> hull1, std::vector<Face> hull2) {
-    std::vector<Face> merged;
-    return merged;
-}
-
-void ConvexHull::save() {
-    try{
-        std::ofstream points_file   (POINTS_FILE, WRITE_FILE);
-        std::ofstream vertices_file (VERTICES_FILE, WRITE_FILE);
-        std::ofstream faces_file    (FACES_FILE, WRITE_FILE);
-
-        for(auto const& point : points){
-            points_file << point[X] << SEPARATOR
-                        << point[Y] << SEPARATOR
-                        << point[Z] << '\n';
-        }
-
-        for(auto it = vertices.begin(); it != vertices.end();){
-            vertices_file << *it;
-            if(++it != vertices.end()){
-                vertices_file << SEPARATOR;
-            }
-        }
-        vertices_file << '\n';
-
-        for(auto const& face : faces){
-            auto it = face.begin();
-            faces_file << *it++ << SEPARATOR
-                       << *it++ << SEPARATOR
-                       << *it << '\n';
-        }
-
-        points_file.close();
-        vertices_file.close();
-        faces_file.close();
+    if(algorithm == incremental){
+        n*n;
     }
-    catch(const std::ofstream::failure& e){
-        std::cout << "ERROR: ostream failed.";
-    }
+    return 0;
 }
