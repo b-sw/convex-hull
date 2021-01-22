@@ -28,7 +28,6 @@ int main(int argc, char* argv[]){
     unitTests();
 
     if(argc == READ_FROM_FILE){
-	std::cout<<"jestesmy tu";
         std::string inFile = inputHandlers::getString(argc, argv, FLAG_IN, 3);
         std::string outFile = inputHandlers::getString(argc, argv, FLAG_OUT, 4);
         //std::vector<Point> pts = getPointsFromFile(inFile);
@@ -36,7 +35,6 @@ int main(int argc, char* argv[]){
         // todo: stopwach cos tam
 
     }else if(argc == AUTOMATIC_GENERATION){
-	std::cout<<"ludzi tlum";
         int n = inputHandlers::getInt(argc, argv, FLAG_N, 2);
         int d = inputHandlers::getInt(argc, argv, FLAG_D, 2);
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
@@ -45,7 +43,6 @@ int main(int argc, char* argv[]){
         // todo: stopwatch cos tam
 
     }else if(argc == AUTOMATIC_TESTING){
-	std::cout<<"i mysli dookola";
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
         int n = inputHandlers::getInt(argc, argv, FLAG_N, 2);
         int d = inputHandlers::getInt(argc, argv, FLAG_D, 2);
