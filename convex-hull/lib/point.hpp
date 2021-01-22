@@ -9,9 +9,15 @@
 */
 #pragma once
 
+#include <fstream>
+#include <vector>
+#include <iostream>
+#include <string>
+
 #include <array>
 #include <vector>
 
+#define SEPARATOR ';'
 #define POINT_COORDS 3
 #define X 0
 #define Y 1
