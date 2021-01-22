@@ -35,10 +35,11 @@ void Stopwatch::examineAlgorithm(int points, int seed, double precision, int pro
         std::vector<Point> pointCloud = generator::generatePoints(seed, n);
         std::vector<Point> processedPoints = preprocessing::preprocess(pointCloud, precision);
         int averageTime = timeAverageNRuns(runs, processedPoints, algorithm);
-        averageTimes.try_emplace(n, averageTime);
+        averageTimes.emplace(n, averageTime);
     }
 
-    int medianN = points + problems*step/2;
+    int medianN = points + ( problems - 1 ) * step / 2;
+
     int medianTime = averageTimes.at(medianN);
     int medianComplexity = algorithms::getTimeComplexity(medianN, algorithm);
 
@@ -48,7 +49,7 @@ void Stopwatch::examineAlgorithm(int points, int seed, double precision, int pro
 
         double qOfN = timeN * medianComplexity / (complexity * medianTime);
         std::pair<int,double> p = std::make_pair(timeN, qOfN);
-        scores.try_emplace(n, p);
+        scores.emplace(n, p);
         keys.push_back(n);
     }
 }

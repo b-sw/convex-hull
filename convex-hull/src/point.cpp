@@ -22,9 +22,9 @@ Point::Point(double x, double y, double z){
 
 std::vector<Point> getPointsFromFile(const std::string& fileName) {
     std::ifstream file;
+    std::vector<Point> pts;
     try{
         file.open(fileName);
-        std::vector<Point> pts;
         std::string x, y, z;
 
         do{
@@ -44,5 +44,7 @@ std::vector<Point> getPointsFromFile(const std::string& fileName) {
     }catch(const std::ifstream::failure& e){
         std::cout << "Exception opening/reading file";
     }
+
+    return pts;
 
 }

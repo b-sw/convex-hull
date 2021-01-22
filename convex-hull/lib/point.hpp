@@ -10,6 +10,7 @@
 #pragma once
 
 #include <array>
+#include <vector>
 
 #define POINT_COORDS 3
 #define X 0
