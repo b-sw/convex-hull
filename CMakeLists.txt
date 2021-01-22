@@ -24,4 +24,4 @@ add_executable(convex_hull
         convex-hull/src/algorithms.cpp
         convex-hull/lib/algorithms.hpp
         convex-hull/src/stopwatch.cpp
-        convex-hull/lib/stopwatch.hpp)
+        convex-hull/lib/stopwatch.hpp convex-hull/lib/inputHandler.hpp convex-hull/src/inputHandler.cpp)

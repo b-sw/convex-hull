@@ -272,39 +272,3 @@ std::vector<Face> algorithms::mergeHulls(std::vector<Face> hull1, std::vector<Fa
     std::vector<Face> merged;
     return merged;
 }
-
-void ConvexHull::save() {
-    try{
-        std::ofstream points_file   (POINTS_FILE, WRITE_FILE);
-        std::ofstream vertices_file (VERTICES_FILE, WRITE_FILE);
-        std::ofstream faces_file    (FACES_FILE, WRITE_FILE);
-
-        for(auto const& point : points){
-            points_file << point[X] << SEPARATOR
-                        << point[Y] << SEPARATOR
-                        << point[Z] << '\n';
-        }
-
-        for(auto it = vertices.begin(); it != vertices.end();){
-            vertices_file << *it;
-            if(++it != vertices.end()){
-                vertices_file << SEPARATOR;
-            }
-        }
-        vertices_file << '\n';
-
-        for(auto const& face : faces){
-            auto it = face.begin();
-            faces_file << *it++ << SEPARATOR
-                       << *it++ << SEPARATOR
-                       << *it << '\n';
-        }
-
-        points_file.close();
-        vertices_file.close();
-        faces_file.close();
-    }
-    catch(const std::ofstream::failure& e){
-        std::cout << "ERROR: ostream failed.";
-    }
-}
