@@ -22,7 +22,7 @@ auto Stopwatch::timeAlgorithm(const std::vector<Point>& points, ConvexHull (*alg
 void Stopwatch::timeForN(int n, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&)) {
     for(int i=0; i<n; ++i){
         auto time = timeAlgorithm(points, algorithm);
-        averageTime += time;
+//        averageTime += time;
 //        times.push_back(time);
     }
 }
@@ -31,7 +31,7 @@ void Stopwatch::write() {
     try{
         std::ofstream times_file   (TIMES_FILE, std::ios::out);
 
-        times_file << "average: " << averageTime << '\n';
+//        times_file << "average: " << averageTime << '\n';
 //
 //        for(auto const& time : times){
 //            times_file << time << '\n';
