@@ -10,8 +10,10 @@
 #pragma once
 
 #include <string>
+#include <iostream>
+#include <cstring>
 
 namespace inputHandlers{
-    int getInt(int argc, char* argv[], const char* flag);
-    std::string getString(int argc, char* argv[], const char* flag);
+    int getInt(int argc, char* argv[], const char* flag, int size);
+    std::string getString(int argc, char* argv[], const char* flag, int size);
 }
