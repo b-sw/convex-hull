@@ -17,9 +17,11 @@ from scipy.spatial.qhull import ConvexHull
 LABELS = ['x', 'y', 'z']
 GRID_DIMENSIONS = 111
 PROJECTION_TYPE = '3d'
-MARKER_COLOR = 'k'  # black
-EDGE_COLOR = 'g'
-MARKER = 'o'  # circle
+VERTEX_MARKER_COLOR = 'r'  # black
+INSIDE_MARKER_COLOR = 'y'
+EDGE_COLOR = 'r'
+VERTEX_MARKER = '.'  # circle
+INSIDE_MARKER = ','
 LINESTYLE = 'none'
 X_VALUES = 0
 Y_VALUES = 1
@@ -29,7 +31,7 @@ POINTS_FILE_NAME = 'points.data'
 VERTICES_FILE_NAME = 'vertices.data'
 FACES_FILE_NAME = 'faces.data'
 SEPARATOR = ';'
-ALPHA = 0.5
+ALPHA = 0.01
 DIMENSIONS = 3
 
 
@@ -46,17 +48,22 @@ def get_from_file(cast_type, file_name):
     return values
 
 
+def plot_inside_points(ax, points):
+    pts = np.array(points)
+    ax.plot(pts.T[X_VALUES], pts.T[Y_VALUES], pts.T[Z_VALUES], color=INSIDE_MARKER_COLOR, marker=INSIDE_MARKER, linestyle=LINESTYLE)
+
+
 def plot_defining_vertices(ax, points, vertices):
     pts = []
     for vertex in vertices:
         pts.append(points[vertex])
 
     pts = np.array(pts)
-    ax.plot(pts.T[X_VALUES], pts.T[Y_VALUES], pts.T[Z_VALUES], color=MARKER_COLOR, marker=MARKER, linestyle=LINESTYLE)
+    ax.plot(pts.T[X_VALUES], pts.T[Y_VALUES], pts.T[Z_VALUES], color=VERTEX_MARKER_COLOR, marker=VERTEX_MARKER, linestyle=LINESTYLE)
 
 
 def color_face(ax, face):
-    surface = art3d.Poly3DCollection(face)
+    surface = art3d.Poly3DCollection(face, linewidths=0.5)
     surface.set_color(colors.rgb2hex(np.random.rand(DIMENSIONS)))
     surface.set_edgecolor(EDGE_COLOR)
     surface.set_alpha(ALPHA)
@@ -71,12 +78,15 @@ def plot_convex_hull():
     fig = plt.figure(num='nasza')
     ax = fig.add_subplot(GRID_DIMENSIONS, projection=PROJECTION_TYPE)
 
+    plot_inside_points(ax, points)
     plot_defining_vertices(ax, points, vertices)
 
     for face in faces:
         face_pts = np.array([points[face[0]], points[face[1]], points[face[2]]])
         color_face(ax, face_pts)
 
+    ax.set_facecolor((0.1, 0.2, 0.3))
+    plt.axis('off')
     # Make axis label
     for label in LABELS:
         eval("ax.set_{:s}label('{:s}')".format(label, label))
@@ -94,6 +104,7 @@ def debug_plot():
     fig = plt.figure(num='debug')
     ax = fig.add_subplot(GRID_DIMENSIONS, projection=PROJECTION_TYPE)
 
+    plot_inside_points(ax, points)
     plot_defining_vertices(ax, points, vertices)
 
     for face in faces:
