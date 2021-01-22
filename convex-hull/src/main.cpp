@@ -32,7 +32,16 @@ int main(int argc, char* argv[]){
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
         std::vector<Point> pts = getPointsFromFile(inFile);
 
-        // todo: stopwach cos tam
+        ConvexHull chull;
+        if(algorithm == "naive"){
+            chull = algorithms::naive(pts);
+        }else if(algorithm == "giftWrapping"){
+            chull = algorithms::giftWrapping(pts);
+        }else if(algorithm == "incremental"){
+            chull = algorithms::incremental(pts);
+        }
+
+        chull.save();
 
     }else if(argc == AUTOMATIC_GENERATION){
         int n = inputHandlers::getInt(argc, argv, FLAG_N, 2);
@@ -40,7 +49,19 @@ int main(int argc, char* argv[]){
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
 
-        // todo: stopwatch cos tam
+        std::vector<Point> pts = generator::generatePoints(seed, n);
+        std::vector<Point> processedPts = preprocessing::preprocess(pts, d);
+
+        ConvexHull chull;
+        if(algorithm == "naive"){
+            chull = algorithms::naive(processedPts);
+        }else if(algorithm == "giftWrapping"){
+            chull = algorithms::giftWrapping(processedPts);
+        }else if(algorithm == "incremental"){
+            chull = algorithms::incremental(processedPts);
+        }
+
+        chull.save();
 
     }else if(argc == AUTOMATIC_TESTING){
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
@@ -59,16 +80,16 @@ int main(int argc, char* argv[]){
         std::cout << "No to klaps" << std::endl;
         // TYMCZASOWE DEMO
 
-        int points       = 50;
-        int seed         = 12345;
-        double precision = 1.5;
-        int problems     = 20;
-        int step         = 3;
-        int runs         = 10;
-
-        auto* stopwatch = new Stopwatch();
-        stopwatch->examineAlgorithm(points, seed, precision, problems, step, runs, algorithms::naive);
-        stopwatch->save();
+//        int points       = 50;
+//        int seed         = 12345;
+//        double precision = 1.5;
+//        int problems     = 20;
+//        int step         = 3;
+//        int runs         = 10;
+//
+//        auto* stopwatch = new Stopwatch();
+//        stopwatch->examineAlgorithm(points, seed, precision, problems, step, runs, algorithms::naive);
+//        stopwatch->save();
     }
 
 }
