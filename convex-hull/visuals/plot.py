@@ -31,7 +31,8 @@ POINTS_FILE_NAME = 'points.data'
 VERTICES_FILE_NAME = 'vertices.data'
 FACES_FILE_NAME = 'faces.data'
 SEPARATOR = ';'
-ALPHA = 0.01
+ALPHA_OUR = 0.01
+ALPHA = 0.2
 DIMENSIONS = 3
 
 
@@ -62,11 +63,11 @@ def plot_defining_vertices(ax, points, vertices):
     ax.plot(pts.T[X_VALUES], pts.T[Y_VALUES], pts.T[Z_VALUES], color=VERTEX_MARKER_COLOR, marker=VERTEX_MARKER, linestyle=LINESTYLE)
 
 
-def color_face(ax, face):
+def color_face(ax, face, alpha):
     surface = art3d.Poly3DCollection(face, linewidths=0.5)
     surface.set_color(colors.rgb2hex(np.random.rand(DIMENSIONS)))
     surface.set_edgecolor(EDGE_COLOR)
-    surface.set_alpha(ALPHA)
+    surface.set_alpha(alpha)
     ax.add_collection3d(surface)
 
 
@@ -83,7 +84,7 @@ def plot_convex_hull():
 
     for face in faces:
         face_pts = np.array([points[face[0]], points[face[1]], points[face[2]]])
-        color_face(ax, face_pts)
+        color_face(ax, face_pts, ALPHA_OUR)
 
     ax.set_facecolor((0.1, 0.2, 0.3))
     plt.axis('off')
@@ -109,7 +110,7 @@ def debug_plot():
 
     for face in faces:
         face_pts = np.array([points[face[0]], points[face[1]], points[face[2]]])
-        color_face(ax, face_pts)
+        color_face(ax, face_pts, ALPHA)
         print(face)
 
     for label in LABELS:
