@@ -11,7 +11,7 @@
 #include "stopwatch.hpp"
 #include "inputHandler.hpp"
 
-#define READ_FROM_FILE 7
+#define READ_FROM_FILE 5
 #define AUTOMATIC_GENERATION 9
 #define AUTOMATIC_TESTING 13
 
@@ -30,19 +30,17 @@ int main(int argc, char* argv[]){
     if(argc == READ_FROM_FILE){
         std::string inFile = inputHandlers::getString(argc, argv, FLAG_IN, 3);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
-        double d = inputHandlers::getDouble(argc, argv, FLAG_D, 2);
 
         std::vector<Point> pts = getPointsFromFile(inFile);
-        std::vector<Point> processedPts = preprocessing::preprocess(pts, d);
 
         ConvexHull chull;
 
         if(algorithm == "naive"){
-            chull = algorithms::naive(processedPts);
+            chull = algorithms::naive(pts);
         }else if(algorithm == "giftWrapping"){
-            chull = algorithms::giftWrapping(processedPts);
+            chull = algorithms::giftWrapping(pts);
         }else if(algorithm == "incremental"){
-            chull = algorithms::incremental(processedPts);
+            chull = algorithms::incremental(pts);
         }
 
         chull.save();
