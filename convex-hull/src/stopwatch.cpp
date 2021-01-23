@@ -27,14 +27,13 @@ int Stopwatch::timeAverageNRuns(int runs, const std::vector<Point>& points, Conv
     return averageTime/runs;
 }
 
-void Stopwatch::examineAlgorithm(int points, int seed, double precision, int problems, int step, int runs, ConvexHull (*algorithm)(const std::vector<Point>&)){
+void Stopwatch::examineAlgorithm(int points, int seed, int problems, int step, int runs, ConvexHull (*algorithm)(const std::vector<Point>&)){
     std::map<int,int> averageTimes;
 
     int finalN = points + problems*step;
     for(int n=points; n < finalN; n += step){
         std::vector<Point> pointCloud = generator::generatePoints(seed, n);
-        std::vector<Point> processedPoints = preprocessing::preprocess(pointCloud, precision);
-        int averageTime = timeAverageNRuns(runs, processedPoints, algorithm);
+        int averageTime = timeAverageNRuns(runs, pointCloud, algorithm);
         averageTimes.emplace(n, averageTime);
     }
 
@@ -47,7 +46,7 @@ void Stopwatch::examineAlgorithm(int points, int seed, double precision, int pro
         int timeN = averageTimes.at(n);
         signed long complexity = algorithms::getTimeComplexity(n, algorithm);
 
-        double qOfN = timeN * medianComplexity / (double)(complexity * medianTime);
+        double qOfN = double(timeN * medianComplexity) / double(complexity * medianTime);
         std::pair<int,double> p = std::make_pair(timeN, qOfN);
         scores.emplace(n, p);
         keys.push_back(n);
