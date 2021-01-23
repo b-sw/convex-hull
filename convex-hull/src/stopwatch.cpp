@@ -12,7 +12,7 @@
 auto Stopwatch::timeAlgorithm(const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&)) {
     auto stopwatchStart = std::chrono::high_resolution_clock::now();
 
-    ConvexHull convexHull = algorithm(points);
+    algorithm(points);
 
     auto stopwatchStop = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>( stopwatchStop - stopwatchStart ).count();
@@ -24,7 +24,7 @@ int Stopwatch::timeAverageNRuns(int runs, const std::vector<Point>& points, Conv
     for(int i=0; i < runs; ++i){
         averageTime += timeAlgorithm(points, algorithm);
     }
-    return averageTime;
+    return averageTime/runs;
 }
 
 void Stopwatch::examineAlgorithm(int points, int seed, double precision, int problems, int step, int runs, ConvexHull (*algorithm)(const std::vector<Point>&)){
@@ -41,13 +41,13 @@ void Stopwatch::examineAlgorithm(int points, int seed, double precision, int pro
     int medianN = points + ( problems - problems%2 ) * step / 2;
 
     int medianTime = averageTimes.at(medianN);
-    int medianComplexity = algorithms::getTimeComplexity(medianN, algorithm);
+    signed long medianComplexity = algorithms::getTimeComplexity(medianN, algorithm);
 
     for(int n=points; n < finalN; n += step){
         int timeN = averageTimes.at(n);
-        int complexity = algorithms::getTimeComplexity(n, algorithm);
+        signed long complexity = algorithms::getTimeComplexity(n, algorithm);
 
-        double qOfN = double(timeN * medianComplexity) / double(complexity * medianTime);
+        double qOfN = timeN * medianComplexity / (double)(complexity * medianTime);
         std::pair<int,double> p = std::make_pair(timeN, qOfN);
         scores.emplace(n, p);
         keys.push_back(n);
@@ -62,6 +62,8 @@ void Stopwatch::save() {
             std::pair<int,double> p = scores.at(n);
             times_file << n        << SEPARATOR
                        << p.first  << SEPARATOR
+                       << std::setprecision(2)
+                       << std::fixed
                        << p.second << '\n';
         }
 

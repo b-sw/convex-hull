@@ -240,7 +240,7 @@ double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point 
     return angle;
 }
 
-int algorithms::getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&)){
+signed long algorithms::getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&)){
     if(algorithm == naive){
         return n*n*n*n;
     }
@@ -248,7 +248,7 @@ int algorithms::getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vect
         return n*n;
     }
     if(algorithm == incremental){
-        n*n;
+        return n*n;
     }
     return 0;
 }

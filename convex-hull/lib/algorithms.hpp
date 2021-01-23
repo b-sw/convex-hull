@@ -31,5 +31,5 @@ namespace algorithms {
 
     double angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point point1, Point point2);
 
-    int getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&));
+    signed long getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&));
 }
