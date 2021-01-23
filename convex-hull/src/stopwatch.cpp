@@ -41,13 +41,12 @@ void Stopwatch::examineAlgorithm(int points, int seed, int problems, int step, i
     int medianN = points + ( problems - problems%2 ) * step / 2;
 
     int medianTime = averageTimes.at(medianN);
-    signed long medianComplexity = algorithms::getTimeComplexity(medianN, algorithm);
 
     for(int n=points; n < finalN; n += step){
         int timeN = averageTimes.at(n);
-        signed long complexity = algorithms::getTimeComplexity(n, algorithm);
+        double complexityRatio = algorithms::getTimeComplexityRatio(n, medianN, algorithm);
 
-        double qOfN = double(timeN * medianComplexity) / double(complexity * medianTime);
+        double qOfN = complexityRatio * timeN / double(medianTime);
         std::pair<int,double> p = std::make_pair(timeN, qOfN);
         scores.emplace(n, p);
         keys.push_back(n);

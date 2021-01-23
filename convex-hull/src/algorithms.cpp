@@ -240,15 +240,16 @@ double algorithms::angleBetweenPlanes(Point edgePoint1, Point edgePoint2, Point 
     return angle;
 }
 
-signed long algorithms::getTimeComplexity(int n, ConvexHull (*algorithm)(const std::vector<Point>&)){
+double algorithms::getTimeComplexityRatio(int n, int medianN, ConvexHull (*algorithm)(const std::vector<Point>&)){
+    double ratio = double(medianN) / double(n);
     if(algorithm == naive){
-        return n*n*n*n;
+        return ratio*ratio*ratio*ratio;
     }
     if(algorithm == giftWrapping){
-        return n*n;
+        return ratio*ratio;
     }
     if(algorithm == incremental){
-        return n*n;
+        return ratio*ratio;
     }
     return 0;
 }
