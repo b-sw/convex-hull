@@ -11,7 +11,7 @@
 #include "stopwatch.hpp"
 #include "inputHandler.hpp"
 
-#define READ_FROM_FILE 5
+#define READ_FROM_FILE 7
 #define AUTOMATIC_GENERATION 9
 #define AUTOMATIC_TESTING 15
 
@@ -30,22 +30,26 @@ int main(int argc, char* argv[]){
     if(argc == READ_FROM_FILE){
         std::string inFile = inputHandlers::getString(argc, argv, FLAG_IN, 3);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
+        double d = inputHandlers::getDouble(argc, argv, FLAG_D, 2);
+
         std::vector<Point> pts = getPointsFromFile(inFile);
+        std::vector<Point> processedPts = preprocessing::preprocess(pts, d);
 
         ConvexHull chull;
+
         if(algorithm == "naive"){
-            chull = algorithms::naive(pts);
+            chull = algorithms::naive(processedPts);
         }else if(algorithm == "giftWrapping"){
-            chull = algorithms::giftWrapping(pts);
+            chull = algorithms::giftWrapping(processedPts);
         }else if(algorithm == "incremental"){
-            chull = algorithms::incremental(pts);
+            chull = algorithms::incremental(processedPts);
         }
 
         chull.save();
 
     }else if(argc == AUTOMATIC_GENERATION){
         int n = inputHandlers::getInt(argc, argv, FLAG_N, 2);
-        int d = inputHandlers::getInt(argc, argv, FLAG_D, 2);
+        double d = inputHandlers::getDouble(argc, argv, FLAG_D, 2);
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
         std::string algorithm = inputHandlers::getString(argc, argv, FLAG_A, 2);
 
@@ -66,7 +70,7 @@ int main(int argc, char* argv[]){
     }else if(argc == AUTOMATIC_TESTING){
         int seed = inputHandlers::getInt(argc, argv, FLAG_SEED, 5);
         int n = inputHandlers::getInt(argc, argv, FLAG_N, 2);
-        int d = inputHandlers::getInt(argc, argv, FLAG_D, 2);
+        double d = inputHandlers::getDouble(argc, argv, FLAG_D, 2);
         int p = inputHandlers::getInt(argc, argv, FLAG_P, 2);
         int step = inputHandlers::getInt(argc, argv, FLAG_STEP, 5);
         int r = inputHandlers::getInt(argc, argv, FLAG_R, 2);
@@ -79,17 +83,27 @@ int main(int argc, char* argv[]){
     }else{
         std::cout << "No to klaps" << std::endl;
         // TYMCZASOWE DEMO
+        std::vector<Point> pts = getPointsFromFile("../convex-hull/resources/sample.txt");
+        ConvexHull chull;
+        chull = algorithms::naive(pts);
+        chull.save();
 
-//        int points       = 50;
-//        int seed         = 12345;
-//        double precision = 1.5;
-//        int problems     = 20;
-//        int step         = 3;
-//        int runs         = 10;
+//        int n = 10000;
+//        double d = 0.1;
+//        int seed = 1234;
+//        std::string algorithm = "giftWrapping";
 //
-//        auto* stopwatch = new Stopwatch();
-//        stopwatch->examineAlgorithm(points, seed, precision, problems, step, runs, algorithms::naive);
-//        stopwatch->save();
+//        std::vector<Point> pts = generator::generatePoints(seed, n);
+//        std::vector<Point> processedPts = preprocessing::preprocess(pts, d);
+//
+//        ConvexHull chull;
+//        chull = algorithms::incremental(pts);
+//        chull.save();
+//        std::cout<<"JUZ";
+//        chull = algorithms::incremental(processedPts);
+//        chull.save();
+
+
     }
 
 }

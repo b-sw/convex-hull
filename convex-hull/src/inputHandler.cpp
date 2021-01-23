@@ -17,6 +17,14 @@ int inputHandlers::getInt(int argc, char **argv, const char* flag, int size) {
     return -1;
 }
 
+double inputHandlers::getDouble(int argc, char **argv, const char* flag, int size) {
+    for(int i = 0; i < argc; ++i){
+        if(strncmp(argv[i], flag, size) == 0) return std::stod(argv[i+1]);
+    }
+
+    return -1.0;
+}
+
 std::string inputHandlers::getString(int argc, char **argv, const char* flag, int size) {
     for(int i = 0; i < argc; ++i){
         if(strncmp(argv[i], flag, size) == 0) return argv[i+1];

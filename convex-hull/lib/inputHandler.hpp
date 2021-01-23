@@ -15,5 +15,6 @@
 
 namespace inputHandlers{
     int getInt(int argc, char* argv[], const char* flag, int size);
+    double getDouble(int argc, char* argv[], const char* flag, int size);
     std::string getString(int argc, char* argv[], const char* flag, int size);
 }
