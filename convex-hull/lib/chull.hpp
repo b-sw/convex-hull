@@ -17,9 +17,19 @@
 
 #include "face.hpp"
 
+#ifdef _WIN32
 #define POINTS_FILE "..\\convex-hull\\visuals\\points.data"
 #define VERTICES_FILE "..\\convex-hull\\visuals\\vertices.data"
 #define FACES_FILE "..\\convex-hull\\visuals\\faces.data"
+
+#endif
+
+#ifdef linux
+#define POINTS_FILE "../convex-hull/visuals/points.data"
+#define VERTICES_FILE "../convex-hull/visuals/vertices.data"
+#define FACES_FILE "../convex-hull/visuals/faces.data"
+#endif
+
 #define SEPARATOR ';'
 #define WRITE_FILE std::ios::out
 

@@ -22,16 +22,15 @@ std::vector<Point> getPointsFromFile(const std::string& fileName) {
         file.open(fileName);
         std::string x, y, z;
 
-        do{
-            for(int i = 0; i < POINT_COORDS; ++i){
-                std::getline(file, x, SEPARATOR);
-                std::getline(file, y, SEPARATOR);
-                std::getline(file, z, '\n');
+        while(
+            std::getline(file, x, SEPARATOR) &&
+	    std::getline(file, y, SEPARATOR) &&
+            std::getline(file, z)){
 
-                pts.emplace_back(std::stod(x), std::stod(y), std::stod(z));
-            }
-        }while(!file.eof());
-
+            pts.emplace_back(std::stod(x), std::stod(y), std::stod(z));
+	    if(file.eof()) break;
+            
+	}
         file.close();
 
         return pts;
