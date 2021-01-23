@@ -29,7 +29,7 @@ public:
 
     auto timeAlgorithm(const std::vector<Point>& points, ConvexHull algorithm(const std::vector<Point>&));
 
-    int timeAverageNRuns(int runs, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&));
+    unsigned long timeAverageNRuns(int runs, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&));
 
     void examineAlgorithm(int points, int seed, int problems, int step, int runs, ConvexHull (*algorithm)(const std::vector<Point>&));
 

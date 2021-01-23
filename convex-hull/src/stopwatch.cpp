@@ -19,11 +19,12 @@ auto Stopwatch::timeAlgorithm(const std::vector<Point>& points, ConvexHull (*alg
     return duration;
 }
 
-int Stopwatch::timeAverageNRuns(int runs, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&)) {
-    int averageTime = 0;
+unsigned long Stopwatch::timeAverageNRuns(int runs, const std::vector<Point>& points, ConvexHull (*algorithm)(const std::vector<Point>&)) {
+    unsigned long averageTime = 0;
     for(int i=0; i < runs; ++i){
         averageTime += timeAlgorithm(points, algorithm);
     }
+    std::cout<<"Single problem solved.\n";
     return averageTime/runs;
 }
 
@@ -33,13 +34,13 @@ void Stopwatch::examineAlgorithm(int points, int seed, int problems, int step, i
     int finalN = points + problems*step;
     for(int n=points; n < finalN; n += step){
         std::vector<Point> pointCloud = generator::generatePoints(seed, n);
-        int averageTime = timeAverageNRuns(runs, pointCloud, algorithm);
+        unsigned long averageTime = timeAverageNRuns(runs, pointCloud, algorithm);
         averageTimes.emplace(n, averageTime);
     }
 
     int medianN = points + ( problems - problems%2 ) * step / 2;
 
-    int medianTime = averageTimes.at(medianN);
+    unsigned long medianTime = averageTimes.at(medianN);
 
     for(int n=points; n < finalN; n += step){
         int timeN = averageTimes.at(n);
