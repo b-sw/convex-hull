@@ -35,6 +35,7 @@ void Stopwatch::examineAlgorithm(int points, int seed, int problems, int step, i
         std::vector<Point> pointCloud = generator::generatePoints(seed, n);
         int averageTime = timeAverageNRuns(runs, pointCloud, algorithm);
         averageTimes.emplace(n, averageTime);
+        std::cout << n << std::endl;
     }
 
     int medianN = points + ( problems - problems%2 ) * step / 2;

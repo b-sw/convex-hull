@@ -80,33 +80,16 @@ int main(int argc, char* argv[]){
     }else{
         std::cout << "No to klaps" << std::endl;
         // TYMCZASOWE DEMO
-//        std::vector<Point> pts = getPointsFromFile("../convex-hull/resources/sample.txt");
-//        ConvexHull chull;
-//        chull = algorithms::naive(pts);
-//        chull.save();
 
-//        int n = 500;
-//        //double d = 2;
-//        int seed = 1234;
-//        //std::string algorithm = "giftWrapping";
-//
-//        std::vector<Point> pts = generator::generatePoints(seed, n);
-//        //std::vector<Point> processedPts = preprocessing::preprocess(pts, d);
-//
-//        std::cout<<"JUZ";
-//        ConvexHull chull = algorithms::naive(pts);
-//        chull.save();
-
-        int n = 500;
-        int runs = 1;
-
-        std::vector<Point> pts = generator::generatePoints(11245, n);
-        std::cout << "generated" << std::endl;
+        int n = 100; //-> 260
+        int seed = 96879;
+        int problems = 10;
+        int step = 50;
+        int runs = 5;
 
         auto* stopwatch = new Stopwatch();
-        std::cout<<"ok";
-        std::cout << stopwatch->timeAverageNRuns(runs, pts, algorithms::naive) / 1000000000.0 << std::endl;
-
+        stopwatch->examineAlgorithm(n, seed, problems, step, runs, algorithms::naive);
+        stopwatch->save();
     }
 
 }
