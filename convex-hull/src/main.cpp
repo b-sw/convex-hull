@@ -78,18 +78,24 @@ int main(int argc, char* argv[]){
         stopwatch->save();
 
     }else{
-        std::cout << "No to klaps" << std::endl;
         // TYMCZASOWE DEMO
 
-        int n = 100; //-> 260
-        int seed = 96879;
-        int problems = 10;
-        int step = 50;
-        int runs = 5;
+//        int n = 100; //-> 260
+//        int seed = 96879;
+//        int problems = 10;
+//        int step = 50;
+//        int runs = 5;
+//
+//        auto* stopwatch = new Stopwatch();
+//        stopwatch->examineAlgorithm(n, seed, problems, step, runs, algorithms::naive);
+//        stopwatch->save();
 
-        auto* stopwatch = new Stopwatch();
-        stopwatch->examineAlgorithm(n, seed, problems, step, runs, algorithms::naive);
-        stopwatch->save();
+        std::vector<Point> pts = getPointsFromFile("../convex-hull/resources/sampleSphere.txt");
+
+        ConvexHull chull = algorithms::giftWrapping(pts);
+
+        chull.save();
+
     }
 
 }
